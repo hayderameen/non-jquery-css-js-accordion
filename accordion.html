@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Accordion for Fiverr</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        width: 40vw;
+        margin: auto;
+        height: 100vh;
+        padding: 15px;
+      }
+      .accordion {
+        width: 100%;
+        color: #787e82;
+        margin-bottom: 15px;
+      }
+      .accordion-button {
+        height: 65px;
+        background-color: #eeeeee;
+        border-radius: 2px;
+        border: 1px solid #c0cedb;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: color 300ms ease, background-color 300ms ease,
+          border-color 300ms ease;
+      }
+      .accordion-button:hover,
+      .active-accordion-button {
+        border-color: #1b49a7;
+        background-color: #1b49a7;
+        color: white;
+      }
+
+      .accordion-button:hover,
+      .active-accordion-button .svg-icon {
+        stroke: white;
+      }
+      .svg-icon {
+        width: 1em;
+        height: 1em;
+        margin-right: 10px;
+      }
+
+      .svg-icon path,
+      .svg-icon polygon,
+      .svg-icon rect {
+        fill: #787e82;
+      }
+
+      .svg-icon path {
+        /* For plus icon */
+        d: path(
+          "M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"
+        );
+      }
+      .minus-icon path {
+        d: path(
+          "M14.776,10c0,0.239-0.195,0.434-0.435,0.434H5.658c-0.239,0-0.434-0.195-0.434-0.434s0.195-0.434,0.434-0.434h8.684C14.581,9.566,14.776,9.762,14.776,10 M18.25,10c0,4.558-3.693,8.25-8.25,8.25c-4.557,0-8.25-3.691-8.25-8.25c0-4.557,3.693-8.25,8.25-8.25C14.557,1.75,18.25,5.443,18.25,10 M17.382,10c0-4.071-3.312-7.381-7.382-7.381C5.929,2.619,2.619,5.93,2.619,10c0,4.07,3.311,7.382,7.381,7.382C14.07,17.383,17.382,14.07,17.382,10"
+        );
+      }
+
+      .triangle-icon {
+        margin-right: 0;
+        margin-left: 10px;
+      }
+
+      .triangle-icon path {
+        d: path(
+          "M12.522,10.4l-3.559,3.562c-0.172,0.173-0.451,0.176-0.625,0c-0.173-0.173-0.173-0.451,0-0.624l3.248-3.25L8.161,6.662c-0.173-0.173-0.173-0.452,0-0.624c0.172-0.175,0.451-0.175,0.624,0l3.738,3.736C12.695,9.947,12.695,10.228,12.522,10.4 M18.406,10c0,4.644-3.764,8.406-8.406,8.406c-4.644,0-8.406-3.763-8.406-8.406S5.356,1.594,10,1.594C14.643,1.594,18.406,5.356,18.406,10M17.521,10c0-4.148-3.374-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.147,17.521,17.521,14.147,17.521,10"
+        );
+      }
+      .heading {
+        flex: 0.8;
+      }
+      .lessons {
+        flex: 0.15;
+      }
+      .totalTime {
+        flex: 0.15;
+      }
+
+      .accordion-body {
+        transform-origin: top;
+        transition: height 400ms ease-in-out;
+        height: 0px;
+        overflow: hidden;
+      }
+
+      .active-accordion-body {
+        border: 1px solid #c0cedb;
+        border-top: none;
+        border-radius: 2px;
+        transition: height 400ms ease-in-out;
+        height: 250px;
+      }
+
+      .accordion-body-item {
+        background-color: #fff;
+        border-bottom: 1px solid #eeeeee;
+        height: 55px;
+        display: flex;
+        align-items: center;
+      }
+      .left-content {
+        flex: 0.9;
+        padding-left: 12px;
+      }
+      .right-content {
+        flex: 0.1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="accordion">
+      <div class="accordion-button">
+        <svg class="svg-icon" viewBox="0 0 20 20">
+          <path></path>
+        </svg>
+        <div class="heading">Course Heading</div>
+        <div class="lessons">7 Lessons</div>
+        <div class="totalTime">02:15:29</div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-item">
+          <svg class="svg-icon triangle-icon" viewBox="0 0 20 20">
+            <path></path>
+          </svg>
+          <div class="left-content">Lecture Title</div>
+          <div class="right-content">34:54</div>
+        </div>
+        <div class="accordion-body-item">
+          <svg class="svg-icon triangle-icon" viewBox="0 0 20 20">
+            <path></path>
+          </svg>
+          <div class="left-content">Lecture Title 2</div>
+          <div class="right-content">20:54</div>
+        </div>
+        <div class="accordion-body-item">
+          <svg class="svg-icon triangle-icon" viewBox="0 0 20 20">
+            <path></path>
+          </svg>
+          <div class="left-content">Lecture Title 3</div>
+          <div class="right-content">34:94</div>
+        </div>
+        <div class="accordion-body-item">
+          <svg class="svg-icon triangle-icon" viewBox="0 0 20 20">
+            <path></path>
+          </svg>
+          <div class="left-content">Lecture Title 4</div>
+          <div class="right-content">12:21</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-button">
+        <svg class="svg-icon" viewBox="0 0 20 20">
+          <path></path>
+        </svg>
+        <div class="heading">Course 2 Heading</div>
+        <div class="lessons">5 Lessons</div>
+        <div class="totalTime">02:15:29</div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-item">
+          <svg class="svg-icon triangle-icon" viewBox="0 0 20 20">
+            <path></path>
+          </svg>
+          <div class="left-content">Lecture Title</div>
+          <div class="right-content">34:54</div>
+        </div>
+        <div class="accordion-body-item">
+          <svg class="svg-icon triangle-icon" viewBox="0 0 20 20">
+            <path></path>
+          </svg>
+          <div class="left-content">Lecture Title 2</div>
+          <div class="right-content">20:54</div>
+        </div>
+        <div class="accordion-body-item">
+          <svg class="svg-icon triangle-icon" viewBox="0 0 20 20">
+            <path></path>
+          </svg>
+          <div class="left-content">Lecture Title 3</div>
+          <div class="right-content">34:94</div>
+        </div>
+        <div class="accordion-body-item">
+          <svg class="svg-icon triangle-icon" viewBox="0 0 20 20">
+            <path></path>
+          </svg>
+          <div class="left-content">Lecture Title 4</div>
+          <div class="right-content">12:21</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const accordions = document.getElementsByClassName("accordion-button");
+      for (let i = 0; i < accordions.length; i++) {
+        accordions[i].addEventListener("click", function () {
+          this.classList.toggle("active-accordion-button");
+          this.nextElementSibling.classList.toggle("active-accordion-body");
+          if (this.classList.length > 1) {
+            this.nextElementSibling.style.height =
+              this.nextElementSibling.scrollHeight + "px";
+          } else {
+            this.nextElementSibling.style.height = "0px";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
