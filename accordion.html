@@ -210,6 +210,7 @@
       for (let i = 0; i < accordions.length; i++) {
         accordions[i].addEventListener("click", function () {
           this.classList.toggle("active-accordion-button");
+          this.firstElementChild.classList.toggle("minus-icon");
           this.nextElementSibling.classList.toggle("active-accordion-body");
           if (this.classList.length > 1) {
             this.nextElementSibling.style.height =
